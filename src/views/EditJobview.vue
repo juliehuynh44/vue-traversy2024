@@ -95,12 +95,13 @@ import { reactive, onMounted } from 'vue';
 import router from '@/router'
 import axios from 'axios'
 import { useToast } from 'vue-toastification'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 const route = useRoute();
-
 const jobId = route.params.id;
+
 const toast = useToast()
+
 const form = reactive({
   type: 'Full-Time',
   title: '',
@@ -133,7 +134,6 @@ onMounted(async () => {
     form.company.description = state.job.company.description;
     form.company.contactEmail = state.job.company.contactEmail;
     form.company.contactPhone = state.job.company.contactPhone;
-
   } catch (error) {
     console.error('Error fetching job, error')
   } finally {
@@ -149,7 +149,7 @@ const handleSubmit = async () => {
     description: form.description,
     salary: form.salary,
     company: {
-      name: form.company.name
+      name: form.company.name,
       description: form.company.description,
       contactEmail: form.company.contactEmail,
       contactPhone: form.company.contactPhone,
@@ -163,7 +163,6 @@ const handleSubmit = async () => {
   } catch (error) {
     console.error('Error fetching job', error);
     toast.error('Job Was Not Updated')
-
   }
 };
 
